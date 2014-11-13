@@ -1,7 +1,7 @@
 inherit rubygem
 
 NAME="ruby-bundler"
-VERSION=1.6.6
+VERSION=1.6.9
 RELEASE=1
 CATEGORY="Ruby"
 SUMMARY="Ruby bundler extension"
