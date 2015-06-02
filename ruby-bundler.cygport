@@ -2,16 +2,18 @@ inherit rubygem
 
 NAME="ruby-bundler"
 VERSION=1.9.9
-RELEASE=1
+RELEASE=2
 CATEGORY="Ruby"
 SUMMARY="Ruby bundler extension"
 DESCRIPTION="Bundler manages an application's dependencies through its entire
 life, across many machines, systematically and repeatably."
 
+PATCH_URI="1.9.9-unbundle-vendor.patch"
+
 ARCH=noarch
 
 PKG_NAMES="${NAME} ${NAME}-doc"
-ruby_bundler_REQUIRES="ruby-net-http-persistent ruby-thor"
+ruby_bundler_REQUIRES="ruby-molinillo ruby-net-http-persistent ruby-thor"
 ruby_bundler_CONTENTS="usr/bin "${RUBYGEM_INSTDIR#/}" "${RUBYGEM_SPEC#/}" usr/share/man/"
 ruby_bundler_doc_CONTENTS=${RUBYGEM_DOCDIR#/}
 
