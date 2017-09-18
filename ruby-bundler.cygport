@@ -1,19 +1,16 @@
 inherit rubygem
 
 NAME="ruby-bundler"
-VERSION=1.9.9
-RELEASE=2
+VERSION=1.15.4
+RELEASE=1
 CATEGORY="Ruby"
 SUMMARY="Ruby bundler extension"
 DESCRIPTION="Bundler manages an application's dependencies through its entire
 life, across many machines, systematically and repeatably."
 
-PATCH_URI="1.9.9-unbundle-vendor.patch"
-
 ARCH=noarch
 
 PKG_NAMES="${NAME} ${NAME}-doc"
-ruby_bundler_REQUIRES="ruby-molinillo ruby-net-http-persistent ruby-thor"
 ruby_bundler_CONTENTS="usr/bin "${RUBYGEM_INSTDIR#/}" "${RUBYGEM_SPEC#/}" usr/share/man/"
 ruby_bundler_doc_CONTENTS=${RUBYGEM_DOCDIR#/}
 
@@ -21,14 +18,10 @@ src_install() {
 	cd ${S}
 	rubygem_install
 
-	for m in lib/bundler/man/bundle{,-config,-exec,-install,-package,-platform,-update}
-	do
-		newman $m ${m##*/}.1
-	done
-	doman lib/bundler/man/gemfile.5
+	doman man/*.[15]
 
 	rm -fr ${D}${RUBYGEM_INSTDIR}/man/
-	rm -fr ${D}${RUBYGEM_INSTDIR}/lib/bundler/man/
 	rm -fr ${D}${RUBYGEM_INSTDIR}/lib/bundler/ssl_certs/
-	rm -fr ${D}${RUBYGEM_INSTDIR}/lib/bundler/vendor/
+	# https://github.com/bundler/bundler/issues/3647
+#	rm -fr ${D}${RUBYGEM_INSTDIR}/lib/bundler/vendor/
 }
